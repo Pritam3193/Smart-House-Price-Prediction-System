@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 import pandas as pd
 import plotly.express as px
 
@@ -6,7 +7,9 @@ st.set_page_config(page_title="Analytics", page_icon="📊", layout="wide")
 
 st.title("Housing Analytics Dashboard")
 
-df = pd.read_csv("../data/cleaned_housing.csv")
+BASE_DIR = Path(__file__).resolve().parents[2]
+
+df = pd.read_csv(BASE_DIR / "data" / "cleaned_housing.csv")
 
 st.sidebar.header("Filters")
 
