@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 import joblib
 import sqlite3
 
@@ -7,11 +8,13 @@ st.set_page_config(page_title="Predict Price", page_icon="💰")
 
 st.title("House Price Prediction")
 
-# Load Model
-model = joblib.load("../models/best_house_price_model.pkl")
-encoder = joblib.load("../models/furnishing_encoder.pkl")
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-# Input Fields
+model = joblib.load(BASE_DIR / "models" / "best_house_price_model.pkl")
+
+encoder = joblib.load(BASE_DIR / "models" / "furnishing_encoder.pkl")
+
+
 area = st.number_input("Area (sq ft)", 500, 20000, 3000)
 
 bedrooms = st.slider("Bedrooms", 1, 10, 3)
